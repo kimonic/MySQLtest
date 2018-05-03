@@ -36,21 +36,48 @@ public class HelloWorld {
             // 执行查询
             System.out.println(" 实例化Statement对象...");
             stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT id, usersname, password FROM users";
-            ResultSet rs = stmt.executeQuery(sql);
+            String sql,sq2;
+            sql = "SELECT Token, username, password FROM users";
+            
+            sq2="select userbookmark.Type, users.nickname from userbookmark  \r\n" + 
+            		"inner join  users " + 
+            		"on userbookmark.Token = users.Token;";
+            
+            ResultSet rs = stmt.executeQuery(sq2);
+            /**
+             * 
+select member.`name`,
+       info.`realname`,
+       member.`phone`,
+       recover.`amount`,
+  	   LEFT(FROM_UNIXTIME(recover.`recover_time`), 10) time
+  FROM `shcf_hf_finance`.`fn_tender_recover` recover
+  LEFT JOIN `shcf_hf_member`.`mb_member` member on 
+  member.`id`= recover.`tender_member_id`
+  LEFT JOIN `shcf_hf_member`.`mb_member_info` info on 
+  info.`member_id`= member.`id`
+ WHERE recover.`recover_time` BETWEEN 1525104000
+   and 1527782399
+ ORDER BY recover.`recover_time` asc,info.`realname` asc
+
+             */
         
             // 展开结果集数据库
             while(rs.next()){
                 // 通过字段检索
-                int id  = rs.getInt("id");
-                String name = rs.getString("usersname");
-                String url = rs.getString("password");
-    
+//                int id  = rs.getInt("Token");
+//                String name = rs.getString("UserName");
+//                String url = rs.getString("PassWord");
+                String type=rs.getString("type");
+                String nickname=rs.getString("nickname");
+                
                 // 输出数据
-                System.out.print("ID: " + id);
-                System.out.print(", 站点名称: " + name);
-                System.out.print(", 站点 password: " + url);
+                System.out.print("type: " + type);
+                System.out.print(",nickname: " + nickname);
+                
+//                System.out.print("Token: " + id);
+//                System.out.print(",UsersName: " + name);
+//                System.out.print(", PassWord: " + url);
                 System.out.print("\n");
             }
             // 完成后关闭
