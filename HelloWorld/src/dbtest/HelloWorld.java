@@ -5,7 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * lib文件夹中的mysql-connect-java-8.0.11.jar需要添加到
+ * 菜单项中  Project --> Properties-->Java Build Path-->Libraries中
+ * 通过Add Jars添加
+ * 否则无法引用到
+ * @author Administrator
+ *
+ */
 public class HelloWorld {
 	// JDBC 驱动名及数据库 URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
